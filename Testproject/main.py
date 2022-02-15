@@ -1,7 +1,7 @@
-# This is a sample Python script.
-
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+import numpy as np  # numpy - manipulate the packet data returned by depthai
+import cv2  # opencv - display the video stream
+import depthai  # depthai - access the camera and its data packets
+import blobconverter  # blobconverter - compile and download MyriadX neural network blobs
 
 
 def print_hi(name):
