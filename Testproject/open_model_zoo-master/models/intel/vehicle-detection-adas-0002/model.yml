@@ -1,0 +1,45 @@
+# Copyright (c) 2022 Intel Corporation
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+description: >-
+  Vehicle detector based on SSD + MobileNet with reduced number of channels and depthwise
+  head.
+task_type: detection
+files:
+  - name: FP32/vehicle-detection-adas-0002.xml
+    size: 261606
+    checksum: bdd959baf671a2cfe5628bd99b1d252d2d290fec5f41fcb634f78911426f2416aaead502fd8c6077e210448bcd6b3dda
+    source: https://storage.openvinotoolkit.org/repositories/open_model_zoo/2022.1/models_bin/2/vehicle-detection-adas-0002/FP32/vehicle-detection-adas-0002.xml
+  - name: FP32/vehicle-detection-adas-0002.bin
+    size: 4314552
+    checksum: caa4273a8a43e8f010fdcbdc67f679452585f7f5d16d70a8bef021cede47ac5e88c145380e5497192ea4ca98847f314e
+    source: https://storage.openvinotoolkit.org/repositories/open_model_zoo/2022.1/models_bin/2/vehicle-detection-adas-0002/FP32/vehicle-detection-adas-0002.bin
+  - name: FP16/vehicle-detection-adas-0002.xml
+    size: 323380
+    checksum: 8d588e9102e32a5a823a695d8b257d7673ef50ee20c62341bf17d70b01629b8699bd5593a4b450558843b5924311759c
+    source: https://storage.openvinotoolkit.org/repositories/open_model_zoo/2022.1/models_bin/2/vehicle-detection-adas-0002/FP16/vehicle-detection-adas-0002.xml
+  - name: FP16/vehicle-detection-adas-0002.bin
+    size: 2157328
+    checksum: c5e281f2624a4fda0ac5199b35ab605e008fc99925d1b3a341198e129fdd02f8a4441963e3215f7b14afc62218de24b2
+    source: https://storage.openvinotoolkit.org/repositories/open_model_zoo/2022.1/models_bin/2/vehicle-detection-adas-0002/FP16/vehicle-detection-adas-0002.bin
+  - name: FP16-INT8/vehicle-detection-adas-0002.xml
+    size: 503486
+    checksum: aadeed86c58175f5466133e10bf5bfe83135da160c887ecd23efa1aeee5b836495da50eb9286fee3cf8b150082f0c288
+    source: https://storage.openvinotoolkit.org/repositories/open_model_zoo/2022.1/models_bin/2/vehicle-detection-adas-0002/FP16-INT8/vehicle-detection-adas-0002.xml
+  - name: FP16-INT8/vehicle-detection-adas-0002.bin
+    size: 1160552
+    checksum: 5f082ff9f2e4600dbe383da9aac859ba80f78cba6536400bf113515da9cd5184826cb60e0a1942dabe98813762f47a18
+    source: https://storage.openvinotoolkit.org/repositories/open_model_zoo/2022.1/models_bin/2/vehicle-detection-adas-0002/FP16-INT8/vehicle-detection-adas-0002.bin
+framework: dldt
+license: https://raw.githubusercontent.com/openvinotoolkit/open_model_zoo/master/LICENSE

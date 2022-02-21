@@ -1,0 +1,36 @@
+# Copyright (c) 2022 Intel Corporation
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+description: >-
+  2D human pose estimation based on EfficientHRNet.
+task_type: human_pose_estimation
+files:
+  - name: FP32/human-pose-estimation-0006.xml
+    size: 1461854
+    checksum: 733b2b11a6c9ec456e9c33f860014e3d213cf2e3d09399a82a75be9fa76fe26de601eb74cdbabc3c0539a88be634f383
+    source: https://storage.openvinotoolkit.org/repositories/open_model_zoo/2022.1/models_bin/2/human-pose-estimation-0006/FP32/human-pose-estimation-0006.xml
+  - name: FP32/human-pose-estimation-0006.bin
+    size: 32780636
+    checksum: d8d3edfbd129d20bf7045746b2f3858a349bc9c85b2a69e252217616f70cd24c4b95f65f199298263fee6c382254b856
+    source: https://storage.openvinotoolkit.org/repositories/open_model_zoo/2022.1/models_bin/2/human-pose-estimation-0006/FP32/human-pose-estimation-0006.bin
+  - name: FP16/human-pose-estimation-0006.xml
+    size: 1917076
+    checksum: 243308f8c0316e95ba661111b2c77274a0fcf9aab8e3740b2382b8734dc08c469f3c41ed7381e84256ed43a44e2f6da7
+    source: https://storage.openvinotoolkit.org/repositories/open_model_zoo/2022.1/models_bin/2/human-pose-estimation-0006/FP16/human-pose-estimation-0006.xml
+  - name: FP16/human-pose-estimation-0006.bin
+    size: 16389034
+    checksum: 0faee3c20cfeec5af03d138f5f0405920bb43a31ce53adf12fbe7f6f7d361ef9e1620fb0dd75cff73f300f4f983a875a
+    source: https://storage.openvinotoolkit.org/repositories/open_model_zoo/2022.1/models_bin/2/human-pose-estimation-0006/FP16/human-pose-estimation-0006.bin
+framework: dldt
+license: https://raw.githubusercontent.com/openvinotoolkit/open_model_zoo/master/LICENSE
