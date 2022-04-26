@@ -1,0 +1,6 @@
+# Voor de server
+sudo apt-get install mosquitto
+
+
+# Voor alle clients
+sudo pip3 install paho-mqtt
