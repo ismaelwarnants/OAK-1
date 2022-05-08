@@ -38,6 +38,7 @@ def trim_last_10_sec_from_video_file(video_file_name):
         print("Could not determine video length: " + str(e))
 
     if duration > 10:
+        # https://gist.github.com/georgechalhoub/e9c1c50507f651c8af90c5f40e8376c7
         print("Video too long, clipping video...")
         end_time = duration + 1
         start_time = duration - 10
