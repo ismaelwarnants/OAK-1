@@ -1,1 +1,1 @@
-pip3 install ffmpeg
+pip3 install ffmpeg pysftp
