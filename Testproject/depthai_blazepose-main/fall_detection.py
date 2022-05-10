@@ -9,7 +9,7 @@ sys.path.append("../..")
 from mediapipe_utils import KEYPOINT_DICT
 
 margin_of_error_on_angle = 10 #degrees
-testing = False
+testing = True
 max_length_of_array = 30
 body_position_array = []
 
@@ -73,7 +73,7 @@ def detect_fall(body):
     except:
         print("No lowerbody landmarks detected")
 
-    average_body_angle = (abs(upper_body_angle_with_x)) #+ abs(lower_body_angle_with_x)) / 2 # bij een kleine verschuiving over naar onder x-as wordt ineens een bijna 360° overgang
+    average_body_angle = (upper_body_angle_with_x) #+ abs(lower_body_angle_with_x)) / 2 # bij een kleine verschuiving over naar onder x-as wordt ineens een bijna 360° overgang
 
     fall = False
     if len(body_position_array) >= max_length_of_array and (not testing):
