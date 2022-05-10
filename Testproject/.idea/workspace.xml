@@ -1,18 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="073a087a-44e1-4a36-a65a-86baf1c3a7e0" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/TelegramBot/test.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/setup_client.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/setup_server.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TelegramBot/bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/TelegramBot/bot.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/depthai_blazepose-main/fall_detection.py" beforeDir="false" afterPath="$PROJECT_DIR$/depthai_blazepose-main/fall_detection.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/depthai_blazepose-main/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/depthai_blazepose-main/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/depthai_blazepose-main/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/depthai_blazepose-main/test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mqtt/receive.py" beforeDir="false" afterPath="$PROJECT_DIR$/mqtt/receive.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/setup.sh" beforeDir="false" />
-    </list>
+    <list default="true" id="073a087a-44e1-4a36-a65a-86baf1c3a7e0" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
