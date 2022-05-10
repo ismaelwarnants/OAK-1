@@ -4,7 +4,7 @@ from BlazeposeDepthaiEdge import BlazeposeDepthai
 from BlazeposeRenderer import BlazeposeRenderer
 
 from math import atan2, degrees
-import sys, time, os, ffmpeg
+import sys, time, os, ffmpeg, threading
 sys.path.append("../..")
 from mediapipe_utils import KEYPOINT_DICT
 

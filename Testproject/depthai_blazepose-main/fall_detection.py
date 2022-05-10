@@ -92,7 +92,7 @@ def init_renderer(tracker):
     return BlazeposeRenderer(
                     tracker,
                     show_3d="mixed",
-                    output="test.avi")
+                    output="test.mp4")
 
 def run():
     fall_detected = False

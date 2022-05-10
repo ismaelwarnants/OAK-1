@@ -9,8 +9,8 @@ def on_connect(client, userdata, flags, rc):
   client.subscribe("topic/test")
 
 def on_message(client, userdata, msg):
-  if msg.payload.decode() == "Hello world!":
-    print("Yes!")
+  if msg.payload.decode() != "":
+
     #client.disconnect()
     
 client = mqtt.Client()

@@ -4,14 +4,14 @@ import fall_detection, os, datetime, time, ffmpeg
 def run():
     fall_detection.run()
 
-    new_file_name = "detection_" + str(datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")) + ".avi"
+    new_file_name = "detection_" + str(datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")) + ".mp4"
     rename_file(new_file_name)
     trim_and_send(new_file_name)
 
 def rename_file(new_file_name):
 
     try:
-        os.rename("test.avi", new_file_name)  # Dit zou normaal de laatste nieuwe detectie moeten geven met tijd en datum
+        os.rename("test.mp4", new_file_name)  # Dit zou normaal de laatste nieuwe detectie moeten geven met tijd en datum
     except Exception as e:
         print("Error while trying to rename file: "+str(e))
 
@@ -63,7 +63,7 @@ def finish():
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     try:
-        os.remove("test.avi") # In case an old video file was still present, it will be deleted before continuing
+        os.remove("test.mp4") # In case an old video file was still present, it will be deleted before continuing
     except:
         print("No leftover file to remove, continuing...")
 
