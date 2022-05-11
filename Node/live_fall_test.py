@@ -1,12 +1,10 @@
-import threading, cv2
-
-from BlazeposeDepthaiEdge import BlazeposeDepthai
-from BlazeposeRenderer import BlazeposeRenderer
-
 from math import atan2, degrees
-import sys, time, os, ffmpeg, datetime
+import sys, time, os, ffmpeg, datetime, threading, cv2
 sys.path.append("../..")
-from mediapipe_utils import KEYPOINT_DICT
+sys.path.append('depthai_blazepose')
+from depthai_blazepose.mediapipe_utils import KEYPOINT_DICT
+from depthai_blazepose.BlazeposeDepthaiEdge import BlazeposeDepthai
+from depthai_blazepose.BlazeposeRenderer import BlazeposeRenderer
 
 margin_of_error_on_angle = 10 #degrees
 
@@ -73,27 +71,7 @@ def init_renderer(tracker):
     return BlazeposeRenderer(
                     tracker,
                     show_3d="mixed",
-                    output="test.avi")
-
-def get_total_video_lentgh(video_file_name):
-    #https://stackoverflow.com/questions/3844430/how-to-get-the-duration-of-a-video-in-python
-    import cv2
-    video = cv2.VideoCapture(video_file_name)
-
-    duration = video.get(cv2.CAP_PROP_POS_MSEC)
-
-    return duration
-
-def trim_last_10_sec_from_video_file(video_file_name):
-    input = ffmpeg.input(video_file_name)
-    end_time = get_total_video_lentgh(video_file_name)
-    start_time = end_time - 10
-    trimmed = ffmpeg.trim(input, start=start_time,end=end_time)
-    out = ffmpeg.output(trimmed, video_file_name)
-
-def trim_and_send(video_file_name):
-    trim_last_10_sec_from_video_file(video_file_name)
-    # Send de video file code komt hier
+                    output="test.mp4")
 
 def run():
     fall_detected = False
@@ -114,22 +92,6 @@ def run():
             else:
                 letter = 'F'
             cv2.putText(frame, letter, (frame.shape[1] // 2, 100), cv2.FONT_HERSHEY_PLAIN, 5, (0, 190, 255), 3)
-            '''if fall_detected: # Dit zou normaal de opname moeten stoppen en een nieuwe moeten maken
-                #body_position_array = []
-                #renderer.exit()
-                #tracker.exit()
-                new_file_name = "detection_"+str(datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S"))+".avi"
-                try:
-                    os.rename("test.avi",new_file_name) #Dit zou normaal de laatste nieuwe detectie moeten geven met tijd en datum
-                except:
-                    print("Error while trying to rename file")
-
-                #thread = threading.Thread(target=trim_and_send, args=(new_file_name))
-                #thread.start()
-                #thread.join()
-
-                #renderer = init_renderer()'''
-                #Hier moet de file nog bijgeknipt (laatste 10 sec) en verstuurd worden in een thread
         key = renderer.waitKey(delay=1)
 
 

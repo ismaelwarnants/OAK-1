@@ -7,7 +7,7 @@ username = "ismael"
 
 def send(filepath):
     srv = pysftp.Connection(host=server_ip, username=username,log="pysftp.log")
-
+    print("sftp is ready to send: "+filepath)
     with srv.cd('demo'):
         srv.put(filepath)
 

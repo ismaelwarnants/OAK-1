@@ -1,10 +1,10 @@
-import fall_detection, os, datetime, time, ffmpeg, sftp_send, mqtt_send
+import live_fall_test, os, datetime, time, ffmpeg, sftp_send, mqtt_send
 
 room_nr = 12
 
 
 def run():
-    fall_detection.run()
+    live_fall_test.run()
     timestamp = str(datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S"))
     new_file_name = "detection_" + timestamp + ".mp4"
     rename_file(new_file_name)
@@ -41,7 +41,12 @@ def trim_last_10_sec_from_video_file(video_file_name):
         print("Video too long, clipping video...")
         end_time = duration + 1
         start_time = duration - 10
-        os.system("ffmpeg -i " + str(video_file_name) + " -ss  " + str(start_time) + " -to " + str(end_time) + " -c copy " + str(video_file_name))
+        os.system("ffmpeg -i " + str(video_file_name) + " -ss  " + str(start_time) + " -to " + str(end_time) + " -c copy " + "clipped_" + str(video_file_name))
+        try:
+            os.remove(str(video_file_name))
+            os.rename("clipped_" + str(video_file_name), str(video_file_name))
+        except Exception as e:
+            print("Error while trying to rename file: " + str(e))
 
 def send_notification_and_video_file(timestamp,video_file_name):
     mqtt_send.send(video_file_name) #This will become a json file

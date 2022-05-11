@@ -7,20 +7,20 @@ from depthai_blazepose.BlazeposeDepthaiEdge import BlazeposeDepthai
 from depthai_blazepose.BlazeposeRenderer import BlazeposeRenderer
 
 margin_of_error_on_angle = 10 #degrees
-testing = True
+testing = False
 max_length_of_array = 30
 body_position_array = []
 
 def detect_fall(body):
-    def angle_with_x(v):
+    def angle_with_y(v):
         # v: 2d vector (x,y)
         # Returns angle in degree of v with x-axis of image plane
 
         # v[0] = x = is verschil in breedte
         # v[1] = y = is verschil in hoogte
-        if v[0] == 0:
+        if v[1] == 0:
             return 0
-        angle = atan2(v[1], v[0])
+        angle = atan2(v[0], v[1])
         return degrees(angle)
 
     def add_angle_to_list(angle):
@@ -57,21 +57,21 @@ def detect_fall(body):
             #return (max(angles) - min(angles)) >= 70 and max(timestamps) - min(timestamps) >= 500000000 and person_is_on_the_ground(angle)
             return angle_diff>=45 and time_diff>= 500000000 and fall
 
-    upper_body_angle_with_x = 0
-    lower_body_angle_with_x = 0
+    upper_body_angle_with_y = 0
+    lower_body_angle_with_y = 0
 
     try:
-        upper_body_angle_with_x = angle_with_x(body.landmarks[KEYPOINT_DICT['nose'],:2] - (body.landmarks[KEYPOINT_DICT['left_hip'],:2]+body.landmarks[KEYPOINT_DICT['right_hip'],:2])/2)
-        print("Estimated angle upper body:" + str(upper_body_angle_with_x))
+        upper_body_angle_with_y = angle_with_y(body.landmarks[KEYPOINT_DICT['nose'],:2] - (body.landmarks[KEYPOINT_DICT['left_hip'],:2]+body.landmarks[KEYPOINT_DICT['right_hip'],:2])/2)
+        print("Estimated angle upper body:" + str(upper_body_angle_with_y))
     except:
         print("No upperbody landmarks detected")
     try:
-        lower_body_angle_with_x = angle_with_x((body.landmarks[KEYPOINT_DICT['left_hip'],:2]+body.landmarks[KEYPOINT_DICT['right_hip'],:2])/2 - (body.landmarks[KEYPOINT_DICT['left_heel'],:2]+body.landmarks[KEYPOINT_DICT['right_heel'],:2])/2)
-        print("Estimated angle lower body:" + str(lower_body_angle_with_x))
+        lower_body_angle_with_y = angle_with_y((body.landmarks[KEYPOINT_DICT['left_hip'],:2]+body.landmarks[KEYPOINT_DICT['right_hip'],:2])/2 - (body.landmarks[KEYPOINT_DICT['left_heel'],:2]+body.landmarks[KEYPOINT_DICT['right_heel'],:2])/2)
+        print("Estimated angle lower body:" + str(lower_body_angle_with_y))
     except:
         print("No lowerbody landmarks detected")
 
-    average_body_angle = (upper_body_angle_with_x) #+ abs(lower_body_angle_with_x)) / 2 # bij een kleine verschuiving over naar onder x-as wordt ineens een bijna 360° overgang
+    average_body_angle = (abs(upper_body_angle_with_y)) #+ abs(lower_body_angle_with_y)) / 2 # bij een kleine verschuiving over naar onder x-as wordt ineens een bijna 360° overgang
 
     fall = False
     if len(body_position_array) >= max_length_of_array and (not testing):
