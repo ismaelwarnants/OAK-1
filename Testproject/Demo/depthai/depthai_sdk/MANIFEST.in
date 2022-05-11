@@ -1,2 +1,0 @@
-include src/depthai_sdk/managers/*.py
-include requirements.txt
