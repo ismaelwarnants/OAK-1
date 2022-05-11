@@ -1,12 +1,10 @@
-import threading, cv2
-
+from math import atan2, degrees
+import sys, time, os, ffmpeg, datetime, threading, cv2
+sys.path.append("../..")
+sys.path.append('depthai_blazepose')
+from depthai_blazepose.mediapipe_utils import KEYPOINT_DICT
 from depthai_blazepose.BlazeposeDepthaiEdge import BlazeposeDepthai
 from depthai_blazepose.BlazeposeRenderer import BlazeposeRenderer
-
-from math import atan2, degrees
-import sys, time, os, ffmpeg, datetime
-sys.path.append("../..")
-from mediapipe_utils import KEYPOINT_DICT
 
 margin_of_error_on_angle = 10 #degrees
 testing = True

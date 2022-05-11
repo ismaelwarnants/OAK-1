@@ -2,10 +2,13 @@ import pysftp
 
 # Source: https://stackoverflow.com/questions/33751854/upload-file-via-sftp-with-python
 
-srv = pysftp.Connection(host="192.168.1.100", username="ismael",log="pysftp.log")
+server_ip = "192.168.1.100"
+username = "ismael"
 
-with srv.cd('demo'): #chdir to public
-    srv.put('Clipped_detection_2022-05-08_15-41-15.avi') #upload file to nodejs/
+def send(filepath):
+    srv = pysftp.Connection(host=server_ip, username=username,log="pysftp.log")
 
-# Closes the connection
-srv.close()
+    with srv.cd('demo'):
+        srv.put(filepath)
+
+    srv.close()
