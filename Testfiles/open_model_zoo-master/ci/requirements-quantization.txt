@@ -59,7 +59,7 @@ networkx==2.5.1
     #   scikit-image
 nibabel==3.2.1
     # via -r tools/accuracy_checker/requirements.in
-nltk==3.6.2
+nltk==3.6.6
     # via -r tools/accuracy_checker/requirements.in
 numpy==1.19.5
     # via
