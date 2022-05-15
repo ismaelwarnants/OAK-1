@@ -36,11 +36,11 @@ def trim_last_10_sec_from_video_file(video_file_name):
     except Exception as e:
         print("Could not determine video length: " + str(e))
 
-    if duration > 10:
+    if duration > 20:
         # https://gist.github.com/georgechalhoub/e9c1c50507f651c8af90c5f40e8376c7
         print("Video too long, clipping video...")
         end_time = duration + 1
-        start_time = duration - 10
+        start_time = duration - 20
         os.system("ffmpeg -i " + str(video_file_name) + " -ss  " + str(start_time) + " -to " + str(end_time) + " -c copy " + "clipped_" + str(video_file_name))
         try:
             os.remove(str(video_file_name))

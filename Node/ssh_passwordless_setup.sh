@@ -1,5 +1,5 @@
 #!/bin/bash
-
+# Source: https://linuxize.com/post/how-to-setup-passwordless-ssh-login/
 ssh-keygen -t rsa -b 4096
 echo Provide the username to authenticate to the server
 read username

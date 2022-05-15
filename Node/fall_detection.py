@@ -96,13 +96,13 @@ def run():
     fall_detected = False
     tracker = init_tracker()
     renderer = init_renderer(tracker)
-    old_time = time.time_ns() / 1000000000
+    old_time = 0
+    time_diff = 0
 
-    while not fall_detected:
-        new_time = time.time_ns()/1000000000
-        time_diff = new_time-old_time
-        old_time = new_time
-        # print("Delay per cycle: "+str(time_diff))
+    while not (time_diff == 10):
+        if old_time != 0:
+            new_time = time.time()
+            time_diff = new_time-old_time
 
         # Run blazepose on next frame
         frame, body = tracker.next_frame()
@@ -114,6 +114,7 @@ def run():
             fall_detected = detect_fall(body)
             letter = ''
             if fall_detected:
+                old_time = time.time()
                 letter = 'T'
             else:
                 letter = 'F'
