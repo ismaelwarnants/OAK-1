@@ -6,7 +6,6 @@ config.read('config.txt')
 
 server_ip = str(config['NODE']['ServerIP'])
 
-# This is the Publisher
 def send(message):
     client = mqtt.Client()
     client.connect(server_ip,1883,60)
