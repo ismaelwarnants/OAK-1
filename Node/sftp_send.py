@@ -14,5 +14,4 @@ def send(filepath):
     print("sftp is ready to send: "+filepath)
     with srv.cd(video_destination):
         srv.put(filepath)
-
     srv.close()

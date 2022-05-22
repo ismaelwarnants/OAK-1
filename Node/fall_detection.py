@@ -9,6 +9,9 @@ from depthai_blazepose.BlazeposeRenderer import BlazeposeRenderer
 margin_of_error_on_angle = 10 #degrees
 demo = True
 
+# This file is an adaptation from this source:
+# https://github.com/geaxgx/depthai_blazepose/blob/main/examples/semaphore_alphabet/demo.py
+
 def detect_fall(body):
     def angle_with_y(v):
         # v: 2d vector (x,y)
@@ -25,7 +28,7 @@ def detect_fall(body):
         return -margin_of_error_on_angle < abs(angle)-90 < margin_of_error_on_angle
 
     angle = 0
-    if demo:
+    if demo: # This if statement can be removed if the demo is not necessary
         arm_angle = 0
         try:
             arm_angle = angle_with_y(
@@ -33,6 +36,7 @@ def detect_fall(body):
         except:
             print("No person in frame")
         angle = arm_angle
+
     else:
         upper_body_angle_with_y = 0
         lower_body_angle_with_y = 0
@@ -65,11 +69,10 @@ def init_renderer(tracker):
                     output="test.mp4")
 
 def run():
-    fall_detected = False
     tracker = init_tracker()
     renderer = init_renderer(tracker)
     old_time = 0
-    time_diff = 0
+    time_diff = 0 # This measures the time difference, so the recording will continue for 10 seconds after the fall
 
     while not (time_diff > 10):
         if old_time != 0:
@@ -96,11 +99,3 @@ def run():
 
     renderer.exit()
     tracker.exit()
-
-
-
-# Hier is een voorbeeld van positie bepalen, dat in een array bijhouden met de timestamps en dan kijken hoe snel die valt
-# https://github.com/geaxgx/depthai_blazepose/blob/main/examples/semaphore_alphabet/demo.py
-
-# Knippen van de video ffmpeg
-# https://stackoverflow.com/questions/68403072/how-can-i-cut-a-video-to-a-certain-length-and-add-an-intro-video-to-it-using-ffm
