@@ -129,3 +129,7 @@ dmypy.json
 .pyre/
 Node/config.txt
 Server/config.txt
+*.mp4
+*.db
+*.sqlite
+.idea/sqlDataSources.xml

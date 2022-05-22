@@ -1,4 +1,4 @@
-import fall_detection, os, datetime, time, ffmpeg, sftp_send, mqtt_send, configparser
+import fall_detection, os, datetime, time, ffmpeg, sftp_send, mqtt_send, configparser, json
 
 config = configparser.ConfigParser()
 config.read('config.txt')
@@ -53,18 +53,16 @@ def trim_last_10_sec_from_video_file(video_file_name):
             print("Error while trying to rename file: " + str(e))
 
 def send_notification_and_video_file(timestamp,video_file_name):
-    mqtt_send.send(video_file_name) #This will become a json file
+    mqtt_send.send(format_message(timestamp,video_file_name)) #This will become a json file
     sftp_send.send(video_file_name)
 
 def trim_and_send(timestamp,video_file_name):
     trim_last_10_sec_from_video_file(video_file_name)
     send_notification_and_video_file(timestamp,video_file_name)
 
-def finish():
-    print()
-    # thread = threading.Thread(target=trim_and_send, args=(new_file_name))
-    # thread.start()
-    # thread.join()
+def format_message(timestamp, video_file_name):
+    message = '{"timestamp": "'+str(timestamp)+'", "room_nr": "'+str(room_nr)+'", "video_file_name": "'+str(video_file_name)+'"}'
+    return str(message)
 
 
 # Press the green button in the gutter to run the script.

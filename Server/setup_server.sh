@@ -1,7 +1,5 @@
 #!/bin/bash
 mv config.txt config_old.txt
-pip3 install telegram paho-mqtt #python-telegram-bot
-#sudo apt-get install mosquitto
 echo Provide the username of the current user
 read username
 echo Choose a name for the new folder of the video files
@@ -18,3 +16,5 @@ ServerUsername = $username
 VideoDestination = $folder_name
 APIKey = $api_key
 TelegramUserID = $user_id" >> config.txt
+./install_requirements.sh
+echo Setup finished!

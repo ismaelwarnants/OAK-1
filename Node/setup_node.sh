@@ -1,4 +1,4 @@
+#!/bin/bash
 ./ssh_passwordless_setup.sh
-pip3 --user install ffmpeg pysftp paho-mqtt
-pip3 install -r depthai_blazepose/requirements.txt
+./install_requirements.sh
 echo Setup finished!
