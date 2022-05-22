@@ -1,5 +1,0 @@
-[NODE]
-ServerIP = 192.168.1.100
-ServerUsername = ismael
-VideoDestination = demo
-RoomNR = 15
