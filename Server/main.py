@@ -50,6 +50,7 @@ def main():
     client.on_message = on_message
 
     client.loop_forever()
+    sql.close_connection()
 
 if __name__ == '__main__':
     main()

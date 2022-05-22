@@ -11,7 +11,6 @@ def add_detection(timestamp, room_nr, video_file_name):
     connection.execute('''INSERT INTO DETECTIONS (TIMESTAMP, ROOM_NR, VIDEO_FILE_NAME) \
     VALUES ("'''+str(timestamp)+'''","'''+str(room_nr)+'''","'''+str(video_file_name)+'''");''')
     connection.commit()
-    connection.close()
 
 def get_detections():
     results = connection.execute('''SELECT * FROM DETECTIONS''').fetchall()
@@ -19,5 +18,8 @@ def get_detections():
     for result in results:
         list_string = list_string + str(result) + "\n"
     return list_string
+
+def close_connection():
+    connection.close()
 
 create_tables()
