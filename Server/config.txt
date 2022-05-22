@@ -1,5 +1,0 @@
-[SERVER]
-ServerUsername = ismael
-VideoDestination = demo
-APIKey = 5347368126:AAGs3plNlDPqF9i057CDpT3rVLXv5AQFlSA
-TelegramUserID = 619833245
