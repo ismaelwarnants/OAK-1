@@ -7,84 +7,56 @@ from depthai_blazepose.BlazeposeDepthaiEdge import BlazeposeDepthai
 from depthai_blazepose.BlazeposeRenderer import BlazeposeRenderer
 
 margin_of_error_on_angle = 10 #degrees
-testing = False
-max_length_of_array = 30
-body_position_array = []
+demo = True
 
 def detect_fall(body):
     def angle_with_y(v):
         # v: 2d vector (x,y)
-        # Returns angle in degree of v with x-axis of image plane
+        # Returns angle in degree of v with y-axis of image plane
 
         # v[0] = x = is verschil in breedte
         # v[1] = y = is verschil in hoogte
         if v[1] == 0:
-            return 0
+            return 90
         angle = atan2(v[0], v[1])
         return degrees(angle)
 
-    def add_angle_to_list(angle):
-        #print("Length: "+ str(len(body_position_array)))
-        if len(body_position_array) >= max_length_of_array:
-            try:
-                body_position_array.pop(0)
-            except:
-                print("List is empty")
-        body_position_array.append([time.time_ns(),angle])
-
-    def person_is_on_the_ground(angle):
-        return -margin_of_error_on_angle < angle < margin_of_error_on_angle
-
     def person_has_fallen(angle):
-        if not testing:
-            add_angle_to_list(angle)
+        return -margin_of_error_on_angle < abs(angle)-90 < margin_of_error_on_angle
 
-        timestamps = []
-        angles = []
-
-        if testing:
-            return person_is_on_the_ground(angle)
-        else:
-            for position in body_position_array:
-                timestamps.append(position[0])
-                angles.append(position[1])
-            angle_diff = (max(angles) - min(angles))
-            time_diff = max(timestamps) - min(timestamps)
-            fall = person_is_on_the_ground(angle)
-            print("Angle: " + str(angle_diff) + "degrees \t Time: " + str(time_diff/1000000) + "ms\t Fall: "+ str(fall))
-            print("Angles: \n"+str(angles))
-            print("Timestamps: \n"+str(timestamps))
-            #return (max(angles) - min(angles)) >= 70 and max(timestamps) - min(timestamps) >= 500000000 and person_is_on_the_ground(angle)
-            return angle_diff>=45 and time_diff>= 500000000 and fall
-
-    upper_body_angle_with_y = 0
-    lower_body_angle_with_y = 0
-
-    try:
-        upper_body_angle_with_y = angle_with_y(body.landmarks[KEYPOINT_DICT['nose'],:2] - (body.landmarks[KEYPOINT_DICT['left_hip'],:2]+body.landmarks[KEYPOINT_DICT['right_hip'],:2])/2)
-        print("Estimated angle upper body:" + str(upper_body_angle_with_y))
-    except:
-        print("No upperbody landmarks detected")
-    try:
-        lower_body_angle_with_y = angle_with_y((body.landmarks[KEYPOINT_DICT['left_hip'],:2]+body.landmarks[KEYPOINT_DICT['right_hip'],:2])/2 - (body.landmarks[KEYPOINT_DICT['left_heel'],:2]+body.landmarks[KEYPOINT_DICT['right_heel'],:2])/2)
-        print("Estimated angle lower body:" + str(lower_body_angle_with_y))
-    except:
-        print("No lowerbody landmarks detected")
-
-    average_body_angle = (abs(upper_body_angle_with_y)) #+ abs(lower_body_angle_with_y)) / 2 # bij een kleine verschuiving over naar onder x-as wordt ineens een bijna 360° overgang
-
-    fall = False
-    if len(body_position_array) >= max_length_of_array and (not testing):
-        fall = person_has_fallen(average_body_angle)
+    angle = 0
+    if demo:
+        arm_angle = 0
+        try:
+            arm_angle = angle_with_y(
+                body.landmarks[KEYPOINT_DICT['left_wrist'], :2] - body.landmarks[KEYPOINT_DICT['left_shoulder'], :2])
+        except:
+            print("No person in frame")
+        angle = arm_angle
     else:
-        fall = person_has_fallen(average_body_angle)
+        upper_body_angle_with_y = 0
+        lower_body_angle_with_y = 0
 
-    return fall
+        try:
+            upper_body_angle_with_y = angle_with_y(body.landmarks[KEYPOINT_DICT['nose'], :2] - (
+                    body.landmarks[KEYPOINT_DICT['left_hip'], :2] + body.landmarks[KEYPOINT_DICT['right_hip'], :2]) / 2)
+        except:
+            print("No upperbody landmarks detected")
+        try:
+            lower_body_angle_with_y = angle_with_y(
+                (body.landmarks[KEYPOINT_DICT['left_hip'], :2] + body.landmarks[KEYPOINT_DICT['right_heel'], :2]) / 2
+                - (body.landmarks[KEYPOINT_DICT['left_hip'], :2] + body.landmarks[KEYPOINT_DICT['right_heel'], :2]) / 2)
+        except:
+            print("No lowerbody landmarks detected")
+
+        angle = (upper_body_angle_with_y + lower_body_angle_with_y) / 2
+
+    return person_has_fallen(angle) #person_has_fallen(average_body_angle)
 
 def init_tracker():
     return BlazeposeDepthai(lm_model="lite",
                                xyz=True,
-                               internal_frame_height=720)
+                               internal_frame_height=480)
 
 def init_renderer(tracker):
     return BlazeposeRenderer(
@@ -99,7 +71,7 @@ def run():
     old_time = 0
     time_diff = 0
 
-    while not (time_diff == 10):
+    while not (time_diff > 10):
         if old_time != 0:
             new_time = time.time()
             time_diff = new_time-old_time
@@ -114,14 +86,13 @@ def run():
             fall_detected = detect_fall(body)
             letter = ''
             if fall_detected:
-                old_time = time.time()
+                if old_time == 0:
+                    old_time = time.time()
                 letter = 'T'
             else:
                 letter = 'F'
             cv2.putText(frame, letter, (frame.shape[1] // 2, 100), cv2.FONT_HERSHEY_PLAIN, 5, (0, 190, 255), 3)
-        key = renderer.waitKey(delay=1)
-
-
+            key = renderer.waitKey(delay=1)
 
     renderer.exit()
     tracker.exit()

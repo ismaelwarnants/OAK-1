@@ -1,6 +1,10 @@
 import paho.mqtt.client as mqtt
+import configparser
 
-server_ip = "192.168.1.100"
+config = configparser.ConfigParser()
+config.read('config.txt')
+
+server_ip = str(config['NODE']['ServerIP'])
 
 # This is the Publisher
 def send(message):

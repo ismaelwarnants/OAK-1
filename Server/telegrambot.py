@@ -1,10 +1,13 @@
-import telegram
+import telegram, configparser
+
+config = configparser.ConfigParser()
+config.read('config.txt')
 
 # Docs: https://python-telegram-bot.readthedocs.io/en/stable/telegram.bot.html
 # Source: https://usp-python.github.io/06-bot/#sending-a-message-part-1
 
-api_key = "5347368126:AAGs3plNlDPqF9i057CDpT3rVLXv5AQFlSA"
-user_id = "619833245"
+api_key = str(config['SERVER']['APIKey'])
+user_id = str(config['SERVER']['TelegramUserID'])
 
 bot = telegram.Bot(token=api_key)
 
@@ -14,10 +17,3 @@ def send_message(message):
 def send_video(video_path):
     # Source: https://stackoverflow.com/questions/47615956/send-video-through-telegram-python-api
     bot.send_video(chat_id=user_id, video=open(video_path, 'rb'), supports_streaming=True)
-
-def main():
-    send_message("YESSSSS")
-    send_video("/home/ismael/Documents/test.mp4")
-
-if __name__ == '__main__':
-    main()

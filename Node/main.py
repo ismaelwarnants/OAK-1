@@ -1,10 +1,14 @@
-import live_fall_test, os, datetime, time, ffmpeg, sftp_send, mqtt_send
+import fall_detection, os, datetime, time, ffmpeg, sftp_send, mqtt_send, configparser
 
-room_nr = 12
+config = configparser.ConfigParser()
+config.read('config.txt')
+
+server_ip = str(config['NODE']['ServerIP'])
+room_nr = str(config['NODE']['RoomNR'])
 
 
 def run():
-    live_fall_test.run()
+    fall_detection.run()
     timestamp = str(datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S"))
     new_file_name = "detection_" + timestamp + ".mp4"
     rename_file(new_file_name)
