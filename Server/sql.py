@@ -1,5 +1,6 @@
 import sqlite3
 
+# Source: https://www.javatpoint.com/python-sqlite
 connection = sqlite3.connect('detections.db')
 
 def create_tables():
