@@ -133,3 +133,4 @@ Server/config.txt
 *.db
 *.sqlite
 .idea/sqlDataSources.xml
+*.txt
