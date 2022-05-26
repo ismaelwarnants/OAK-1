@@ -3,7 +3,7 @@ With this end-to-end system, an OAK-1 and a Raspberry Pi can be used to detect a
 ![image](https://user-images.githubusercontent.com/22435080/170510964-5c70b207-acd8-400e-b82e-8bd3dd0a2d12.png)
 In this image, the node is a Raspberry Pi 4 with an OAK-1 camera, and the client is the healthcare personnel.
 
-NOTE: This is a proof of concept, this means that the system is not ready for production use and that the fall detection is only built for demonstration purposes only.
+NOTE: This is a proof of concept, this means that the system is not ready for production use and that the fall detection is only built for demonstration purposes.
 
 # Setup
 Before proceeding, it is advised to make all files executable in this repo.
