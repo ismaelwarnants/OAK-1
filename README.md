@@ -1,12 +1,13 @@
 # End-to-end system for low-cost fall detection using an OAK-1 camera
-With this end-to-end system, an OAK-1 and a Raspberry Pi (=Node) can be used to detect a fall.
+With this end-to-end system, an OAK-1 and a Raspberry Pi can be used to detect a fall.
+![image](https://user-images.githubusercontent.com/22435080/170510964-5c70b207-acd8-400e-b82e-8bd3dd0a2d12.png)
+In this image, the node is a Raspberry Pi 4 with an OAK-1 camera, and the client is the healthcare personnel.
 
+# Setup
 Before proceeding, it is advised to make all files executable in this repo.
 ```
 sudo chmod +x -R OAK-1
 ```
-
-# Setup
 
 To set up there is a script for the Node and for the Server.
 
@@ -82,7 +83,28 @@ bash install_requirements.sh
 ```
 
 # Parts of the system that can be improved
-To be added...
+
+## Recording quality can be set at 720p
+For now the recording quality was set at 480p, because a 20 second clip at 720p exceeded the 50 MB file that a Telegram bot can send at once.
+This upload limit (per file), can be extended to 2 GB/file when you set up your own server for the bot.
+https://core.telegram.org/bots/api#using-a-local-bot-api-server
+
+## Recording instablity with some micro sd cards
+Some micro sd cards can cause stability issues with the recording speed. This is probably due to some micro sd cards not being fast enough to write the frame, even at 480p. This slows down the frames per second that can be written. Because of this, the video that normally expects 20 fps, will now create a video shorter video with the frames that are rendered.
+
+To solve this, an ssd or similar storage could be used. 
+
+Or the files could be written in the /tmp folder, which is located in ram. But this solution requires more complex video storage management and will cause data loss when the power is lost.
+
+## Reliability
+At this moment, the system does not check for failures in sending the data. This should be done at every stage (mqtt, sftp, ...).
+
+There is also nothing implemented for a fallback server in case a server requires maintance or has an issue.
+
+## Dependance on an active internet connection
+By using Telegram, we depend on an active internet connection to notify the healtcare personnel. This has the advantage that they can receive the message on any network in any place. However, if the internet connection of the server is disconnected, healthcare personnel do not receive notifications.
+
+To prevent this, a fallback system could be created to immediately take over on the local network, this system could also replace the Telegram bot.
 
 # FAQ
 
