@@ -3,6 +3,8 @@ With this end-to-end system, an OAK-1 and a Raspberry Pi can be used to detect a
 ![image](https://user-images.githubusercontent.com/22435080/170510964-5c70b207-acd8-400e-b82e-8bd3dd0a2d12.png)
 In this image, the node is a Raspberry Pi 4 with an OAK-1 camera, and the client is the healthcare personnel.
 
+NOTE: This is a proof of concept, this means that the system is not ready for production use and that the fall detection is only built for demonstration purposes only.
+
 # Setup
 Before proceeding, it is advised to make all files executable in this repo.
 ```
@@ -56,6 +58,8 @@ or
 ```
 bash setup_node.sh
 ```
+NOTE: Some operating systems require to use python and pip instead of python3 and pip3 respectively, this has to be changed in the install_requirements.sh file before running the setup script.
+
 ### Notes during installation:
 To setup the Node, the first questions can be ignored by pressing enter, these questions are to set up passwordless authentication to the server.
 
@@ -118,7 +122,7 @@ sudo udevadm control --reload-rules && sudo udevadm trigger
 ## How to solve: AttributeError: 'NoneType' object has no attribute 'background_color' GLXBadFBConfig
 Run this command each time before running the main.py code on the Node. It is also possible to place this variable in the .bashrc file in the home folder.
 
-This error only seemed to happen on the Raspberry Pi 4B during testing, but it could happen on other single board computers.
+This error only seemed to happen on the Raspberry Pi 4B with Raspberry Pi OS during testing, but it could happen on other single board computers.
 ```
 export MESA_GL_VERSION_OVERRIDE=4.5
 ```
