@@ -49,6 +49,8 @@ bash install_requirements.sh
 ## Node setup
 The node has to have python 3.8 or 3.9 and pip installed and running.
 
+NOTE: If you use an ARM CPU, you need to have a 64-bit architecture with a 64-bit operating system.
+
 Afterwards, the setup_node.sh script can be ran to prepare the system.
 ```
 ./setup_node.sh
